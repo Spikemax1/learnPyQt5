@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QAction
 from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtGui import QIcon
 
 
 class Window(QMainWindow):
@@ -20,7 +21,15 @@ class Window(QMainWindow):
         toolMenu = mainMenu.addMenu("Tool")
         helpMenu = mainMenu.addMenu("Help")
 
-        exitButton = QAction()
+        exitButton = QAction(QIcon("Delete.png"), 'Exit', self)
+        exitButton.setShortcut("Ctrl+E")
+        exitButton.setStatusTip("Close application")
+        exitButton.triggered.connect(self.close)
+        fileMenu.addAction(exitButton)
+
+        but1 = QAction(QIcon(""), 'But1', self)
+        but1.triggered.connect(self.func1)
+        viewMenu.addAction(but1)
 
 
         self.setWindowTitle(tite)
@@ -29,6 +38,8 @@ class Window(QMainWindow):
         self.setToolTip('QMenuBar')        
         self.show()
 
+    def func1(self):
+        print('Hi')
     
 
 app = QApplication(sys.argv)
